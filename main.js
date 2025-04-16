@@ -1,17 +1,31 @@
 import Webpack from 'webpack'
 
 let webpack = Webpack({
+    devtool: false,
+    
+    experiments: {
+        outputModule: true,
+    },
+    
     entry: {
-        'bundle.js': './entry.ts'
+        'bundle-js.js': './entry.js',
+        'bundle-ts.js': './entry.ts',
     },
     
-    infrastructureLogging: {
-        debug: /PackFileCache/
+    target: ['node23', 'es2024'],
+    
+    output: {
+        filename: '[name]',
+        globalObject: 'globalThis',
+        module: true,
+        library: {
+            type: 'module',
+        },
+        chunkLoading: false
     },
     
-    cache: {
-        type: 'filesystem',
-        compression: false,
+    optimization: {
+        minimize: false
     },
     
     module: {
@@ -24,9 +38,11 @@ let webpack = Webpack({
                 options: {
                     configFile: './tsconfig.json',
                     onlyCompileBundledFiles: true,
+                    transpileOnly: true,
                     compilerOptions: {
                         module: 'ESNext',
                         moduleResolution: 'Bundler',
+                        declaration: false,
                         noEmit: false,
                         allowImportingTsExtensions: false,
                     }
