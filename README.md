@@ -1,7 +1,5 @@
 ### reproduce
 ```shell
-# prepare windows machine
-
 npm install -g pnpm
 
 git clone https://github.com/ShenHongFei/webpack-bug.git
