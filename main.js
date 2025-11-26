@@ -1,6 +1,8 @@
 import Webpack from 'webpack'
 
 let webpack = Webpack({
+    mode: 'production',
+    
     devtool: false,
     
     experiments: {
@@ -8,8 +10,8 @@ let webpack = Webpack({
     },
     
     entry: {
-        'bundle-js.js': './entry.js',
-        'bundle-ts.js': './entry.ts',
+        'bundle.mjs': './entry.js',
+        ... process.argv[2] === 'normal' ? { } : { 'other.mjs': './other.js' }
     },
     
     target: ['node23', 'es2024'],
@@ -19,7 +21,7 @@ let webpack = Webpack({
         globalObject: 'globalThis',
         module: true,
         library: {
-            type: 'module',
+            type: 'module'
         },
         chunkLoading: false
     },
@@ -28,28 +30,7 @@ let webpack = Webpack({
         minimize: false
     },
     
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                loader: 'ts-loader',
-                // https://github.com/TypeStrong/ts-loader
-                options: {
-                    configFile: './tsconfig.json',
-                    onlyCompileBundledFiles: true,
-                    transpileOnly: true,
-                    compilerOptions: {
-                        module: 'ESNext',
-                        moduleResolution: 'Bundler',
-                        declaration: false,
-                        noEmit: false,
-                        allowImportingTsExtensions: false,
-                    }
-                }
-            },
-        ]
-    }
+    cache: false
 })
 
 
@@ -59,7 +40,7 @@ await new Promise((resolve, reject) => {
             reject(error)
         else if (stats.hasErrors()) {
             console.log(stats.toString(webpack.options.stats))
-            reject(new Error(`${this.name} build failed`))
+            reject(new Error('build failed'))
         } else
             resolve(stats)
     })
@@ -74,4 +55,3 @@ await new Promise((resolve, reject) => {
             resolve()
     })
 })
-

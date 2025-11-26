@@ -1,3 +1,6 @@
-export { default as Koa } from 'koa'
+import { flist } from 'xshell'
 
-export { default as KoaCors } from '@koa/cors'
+if (!flist)
+    throw new Error('flist should exists')
+
+await Promise.resolve()
