@@ -1,5 +1,7 @@
 ### Problem
-When building multiple entries, the imported functions in the generated bundle are empty. Webpack@5.101.0 is the last working version; subsequent versions are incorrect.
+When building multiple entries, the imported functions in the generated bundle are empty.  
+
+Webpack@5.101.0 is the last working version; subsequent versions are incorrect.
 
 ### Reproduce
 ```shell
