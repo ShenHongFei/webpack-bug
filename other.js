@@ -1,5 +1,5 @@
-import { foo } from './src/index.ts'
+import { fcopy } from 'xshell'
 
 await Promise.resolve()
 
-console.log(foo)
+console.log(fcopy)

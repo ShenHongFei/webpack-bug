@@ -1,5 +1,5 @@
 ### Problem
-When building multiple entries, the imported functions in the generated bundle are empty.  
+When building multiple entries, the imported functions in the generated bundle are undefined.  
 
 Webpack@5.101.0 is the last working version; subsequent versions are incorrect.
 
@@ -14,10 +14,10 @@ cd webpack-bug
 pnpm install
 
 # Error: flist should exists
-node ./main.js && node ./dist/bundle.mjs
+node ./build.js && node ./dist/bundle.mjs
 
 # no error: single entry
-node ./main.js normal && node ./dist/bundle.mjs
+node ./build.js normal && node ./dist/bundle.mjs
 ```
 
 ### Error
