@@ -10,8 +10,7 @@ let webpack = Webpack({
     },
     
     entry: {
-        'bundle.mjs': './entry.js',
-        ... process.argv[2] === 'normal' ? { } : { 'other.mjs': './other.js' }
+        'bundle.mjs': './entry.cjs'
     },
     
     target: ['node23', 'es2024'],
